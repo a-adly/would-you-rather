@@ -1,0 +1,45 @@
+.pollItemContainer {
+	margin: 20px;
+}
+
+
+.pollItemPaper {
+    overflow: auto
+}
+
+.pollItemBoxHeader {
+	font-weight: bold;
+	background-color: lightgray;
+	text-align: left;
+	padding: 10px 15px;
+}
+
+
+.pollItemControls {
+	margin-top: 10px;
+	padding: 20px;
+}
+
+
+.pollItemFormControl {
+    width: 100%;
+    margin-top: 30px !important;
+}
+
+.pollItemText {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.pollItemSeparator {
+    text-align: center;
+    background-color: lightgray;
+    height: 100%;
+    width: 1px;
+}
+
+.pollItemMainTitle {
+    font-weight: bold;
+    font-size: 1em;
+    height: 30px;
+}

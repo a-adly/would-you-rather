@@ -1,0 +1,26 @@
+.notFoundContainer {
+	max-width: 600px;
+	margin: auto;
+	text-align: center;
+}
+
+.notFoundTitle {
+    font-weight: bold;
+    text-align: center;
+    font-size: 5vw;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #f50057;
+}
+
+.notFoundMessage {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top:40px;
+    margin-bottom: 40px;
+}
+
+

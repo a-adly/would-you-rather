@@ -1,0 +1,50 @@
+.questionContainer {
+	max-width: 600px;
+	margin: auto;
+}
+
+.questionPaper {
+    overflow: auto
+}
+
+.questionBoxHeader {
+	font-weight: bold;
+	text-align: center;
+	background-color: lightgray;
+	text-align: left;
+	padding: 10px 15px;
+}
+
+
+
+.questionControls {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+
+.questionFormControl {
+    width: 100%;
+}
+
+.questionText {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.questionSeparator {
+    text-align: center;
+    background-color: lightgray;
+    height: 100%;
+    width: 1px;
+}
+
+.questionMainTitle {
+    
+    font-weight: bold;
+    font-size: 1.2em;
+    
+    
+}

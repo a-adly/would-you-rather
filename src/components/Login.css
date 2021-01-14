@@ -1,0 +1,43 @@
+.long-loginContainer {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+.long-paper {
+    padding: 20px;
+    overflow: auto
+}
+
+.loginBoxHeader {
+    background-color: lightgray;
+    padding: 15px;
+}
+
+.loginBoxTitle {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+
+.loginControls {
+    margin-top: 30px;
+}
+
+
+.formControl {
+    width: calc(100% - 10px);
+    margin: 10px 0px !important;
+}
+
+.loginBoxImage {
+    width: 30px;
+    height: 30px;
+}
+
+#root .loginBtn {
+    background: #36a677;
+    color: #fff;
+    padding: 8px;
+}
