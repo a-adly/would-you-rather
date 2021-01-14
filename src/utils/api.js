@@ -6,20 +6,16 @@ import {
 } from './_DATA.js';
 
 
-export function getInitialData() {
+export function fetchData() {
     return Promise.all([
-        _getUsers(),
-        _getQuestions()
-    ]).then(([users,questions]) => ({
-        users,
-        questions
+        _getQuestions(),
+        _getUsers()
+    ]).then(([questions,users]) => ({
+        questions,
+        users
     }));
 }
 
-export function saveQuestion(question){
-    return _saveQuestion(question);
-}
+export const saveQuestion = (_saveQuestion)
+export const saveAnswer = (_saveQuestionAnswer)
 
-export function saveQuestionAnswer(answer){
-    return _saveQuestionAnswer(answer);
-}

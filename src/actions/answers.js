@@ -1,29 +1,29 @@
-import { saveQuestionAnswer } from "../../utils/api";
+import { saveAnswer } from "../utils/api";
 import { addAnswerToUser } from "./users";
 import { showLoading, hideLoading } from "react-redux-loading";
 
-export const ADD_ANSWER = "ADD_ANSWER";
+export const AT_ADD_ANSWER = "AT_ADD_ANSWER";
 
 function addAnswer(answer) {
   return {
-    type: ADD_ANSWER,
+    type: AT_ADD_ANSWER,
     answer,
   };
 }
 
-export function handleAddAnswer(qid, answer) {
+export function asyncAddAnswer(qid, answer) {
   return (dispatch, getState) => {
-    const { authedUser } = getState();
     dispatch(showLoading());
+    const { authedUser } = getState();
     const info = {
       authedUser,
       qid,
       answer,
     };
-    return saveQuestionAnswer(info).then(() => {
+    return saveAnswer(info).then(() => {
       dispatch(addAnswer(info));
       dispatch(addAnswerToUser(info));
       dispatch(hideLoading());
-    });
+    }); // async on API
   };
 }

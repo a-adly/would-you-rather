@@ -1,11 +1,340 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   max-width: 1200px;
   margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #595959;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 100px auto;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ================================= */
+/* navbar component */
+/* ================================= */
+
+
+header {
+  background-color: #1e96d0;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navLink {
+  color: #fff;
+  padding: 15px;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.navLink:hover,
+.navLink:active {
+  background-color: #027db9;
+}
+
+
+header .user-area {
+  display: inline-flex;
+  align-items: center;
+}
+
+header .user-area h6 {
+  color: #fff;
+  margin: 0;
+  font-size: 0.8em;
+}
+
+
+header .userAvatar {
+  width: 40px;
+  height: 40px;
+}
+
+header .navLinkButton {
+  background: none;
+  border: 0;
+  color: #fff;
+  font-weight: 700;
+}
+
+
+/* ================================= */
+/* login component */
+/* ================================= */
+
+.container.login {
+  text-align: center;
+}
+
+.container.login h1 {
+  font-size: 1.4em;
+}
+
+.container.login h1 span {
+  color: #f50057;
+}
+
+.container.login .userAvatar {
+  width: 30px;
+  height: 30px;
+}
+
+.container.login .user-login-btn {
+  background: #390f6a;
+  color: #fff;
+  padding: 8px;
+  margin: 15px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.container.login .userName {
+  font-size: 0.95em;
+}
+
+
+/* ================================= */
+/* Home component */
+/* ================================= */
+
+.tab-link {
+  width: calc(50% - 10px);
+  background: #dfdfdf;
+  border: 0;
+  padding: 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tab-link:hover,
+.tab-link:active,
+.tab-link.active {
+  background: #808080;
+  color: #fff;
+}
+
+/* ================================= */
+/* Poll card component */
+/* ================================= */
+
+.poll-card,
+.poll-result,
+.question-card,
+.question,
+.score-card {
+  border: 1px solid #cacaca;
+  border-radius: 5px;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.poll-card h2,
+.poll-result h2,
+.question h2,
+.score-card h2 {
+  font-size: 1.3em;
+  margin-top: 5px;
+}
+
+.card-contents {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.poll-card .userAvatar,
+.poll-result .userAvatar,
+.question .userAvatar,
+.score-card .userAvatar {
+  width: 100px;
+  height: 100px;
+}
+
+.card-separator {
+  border-left: 1px solid #cacaca;
+  height: 100%;
+  min-height: 100px;
+}
+
+.poll-card a {
+  background-color: #38a859;
+  color: #fff;
+  padding: 7px;
+  border-radius: 5px;
+  display: block;
+  margin-top: 20px;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+/* ================================= */
+/* Poll result component */
+/* ================================= */
+.poll-result h3 {
+  font-size: 1em;
+  /* margin-top: 5px; */
+}
+
+.poll-result-answer {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #cacaca;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.poll-result-answer p {
+  margin: 10px 0;
+  font-size: 1em;
+}
+
+.poll-result-answer .poll-result-voteCount {
+  font-size: 0.8em;
+}
+
+.poll-result-answer.activeOption {
+  background-color: #dcf9e3;
+  color: #023a08;
+  border: 1px solid #38a244;
+}
+
+
+.poll-result-userVote {
+  background-color: #1ca444;
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.75em;
+  right: -15px;
+  top: -10px;
+  height: 45px;
+  width: 45px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  transform: rotate(15deg);
+}
+
+/* ================================= */
+/* add question component */
+/* ================================= */
+
+.new-question h1 {
+  font-size: 1.25em;
+}
+
+.question-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-question h2 {
+  font-size: 1.1em;
+}
+
+.new-question .option-input {
+  font-size: 0.9em;
+  border: 1px solid #bdbdbd;
+  border-radius: 3px;
+  margin: 10px 0;
+  padding: 7px;
+  color: #2d5b4a;
+  width: 250px;
+  display: block;
+}
+
+.submit-question {
+  display: block;
+  background: #1e96d0;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-question:hover,
+.submit-question:active {
+  background: #2ba3dd;
+}
+
+.submit-question:disabled {
+  background: #666666;
+  cursor: not-allowed;
+}
+
+/* ================================= */
+/* Answer question component */
+/* ================================= */
+
+.question .input-group {
+  margin: 15px 0;
+}
+
+/* ================================= */
+/* score card component */
+/* ================================= */
+
+.score-card {
+  margin: 30px 0;
+}
+
+.score-card p {
+  font-size: 0.8em;
+}
+
+.score-card p span {
+  background: #00b1e8;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+  height: 20px;
+  line-height: 20px;
+}
+
+
+
+/* ================================= */
+/* 404 page component */
+/* ================================= */
+
+
+.page404 {
+  text-align: center;
+}
+
+.page404 h1 {
+  text-align: center;
+  font-size: 5vw;
+  font-weight: 700;
+  color: #f50057;
+}
+
+.page404 a {
+  display: block;
+  margin: 30px 0;
 }

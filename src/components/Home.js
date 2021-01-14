@@ -1,50 +1,33 @@
 import React, { Component } from "react";
-
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import TabContainer from "./TabContainer";
-import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-
-import "./Home.css";
+import TabContents from "./TabContents";
 
 class Home extends Component {
   state = {
-    value: 0,
+    tabValue: 0,
   };
 
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
+  handleChange = (tabValue) => (e) => this.setState({ tabValue });
 
   render() {
-    const { value } = this.state;
-    const { authedUser } = this.props;
+    const { state, props, handleChange } = this;
+    const { authedUser } = props;
+    const { tabValue } = state;
 
     if (!authedUser) return <Redirect to="/login" />;
 
     return (
-      <div className="homeContainer">
-        <Paper>
-          <Grid container spacing={16} justify="center">
-            <Grid item xs={12}>
-              <Tabs
-                value={value}
-                onChange={this.handleChange}
-                variant="fullWidth"
-              >
-                <Tab label="Unanswered Questions" />
-                <Tab label="Answered Questions" />
-              </Tabs>
-            </Grid>
-            <Grid item xs={12}>
-              {value === 0 && <TabContainer answered={false}></TabContainer>}
-              {value === 1 && <TabContainer answered={true}></TabContainer>}
-            </Grid>
-          </Grid>
-        </Paper>
+      <div className="container home">
+        <div className="tabs">
+          <button className={`tab-link ${!tabValue && "active"}`} onClick={handleChange(0)}>
+            Unanswered Questions
+          </button>
+          <button className={`tab-link ${tabValue && "active"}`} onClick={handleChange(1)}>
+            Answered Questions
+          </button>
+        </div>
+        <TabContents showAnswered={tabValue} />
       </div>
     );
   }

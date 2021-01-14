@@ -1,44 +1,32 @@
-import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import ScoreCard from "./ScoreCard";
+import React, { Component } from "react";
+import UserScoreCard from "./UserScoreCard";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { calculateUserScore } from "../utils/helper";
-
-import './LeaderBoard.css';
+import { getUserScore } from "../utils/helper";
 
 class LeaderBoard extends Component {
+  render() {
+    const { userIds, authedUser } = this.props;
 
-    render() {
-        const { userIds, authedUser } = this.props;
-        
-        if(!authedUser){
-            return <Redirect to="/login" />
-        }
-        
-        return (
-            <div className="leaderBoardContainer">
-                <Grid container spacing={24} direction="column">
-                    {
-                        userIds.map((id) => (
-                            <Grid key={id} item xs={12}>
-                                <ScoreCard  id={id}></ScoreCard>
-                            </Grid>
-                        ))
-                    }
-                    
-                </Grid>
-            </div>
-        );
+    if (!authedUser) return <Redirect to="/login" />;
+
+    return (
+      <div className="container leaderBoard">
+        {userIds.map((id) => (
+          <UserScoreCard key={id} id={id} />
+        ))}
+      </div>
+    );
   }
 }
 
-function mapStateToProps({users, questions, authedUser}) {
-    return {
-        authedUser,
-        userIds: Object.keys(users)
-            .sort((a,b) => calculateUserScore(users[b]) - calculateUserScore(users[a]))
-    }
+function mapStateToProps({ users, questions, authedUser }) {
+  return {
+    authedUser,
+    userIds: Object.keys(users).sort(
+      (a, b) => getUserScore(users[b]) - getUserScore(users[a])
+    ),
+  };
 }
 
 export default connect(mapStateToProps)(LeaderBoard);

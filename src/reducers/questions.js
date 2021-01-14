@@ -1,21 +1,22 @@
-import { RECEIVE_QUESTIONS, ADD_QUESTION } from "../actions/questions";
-import { ADD_ANSWER } from "../actions/answers";
+import { AT_RECEIVE_QUESTIONS, AT_ADD_QUESTION } from "../actions/questions";
+import { AT_ADD_ANSWER } from "../actions/answers";
 
 export default function questions(state = {}, action) {
   switch (action.type) {
-    case RECEIVE_QUESTIONS:
+    case AT_RECEIVE_QUESTIONS:
       return {
         ...state,
         ...action.questions,
       };
-    case ADD_QUESTION:
+    case AT_ADD_QUESTION:
       const { question } = action;
       return {
         ...state,
         [question.id]: question,
       };
-    case ADD_ANSWER:
+    case AT_ADD_ANSWER:
       const { answer } = action;
+      console.log(answer);
       return {
         ...state,
         [answer.qid]: {

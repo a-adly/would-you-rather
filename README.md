@@ -25,3 +25,11 @@ The project can be viewed in the browser at
 
 - [http://localhost:3000](http://localhost:3000)
 
+
+## Credits
+
+Thanks to [this repo](https://github.com/zeeshanhanif/would-you-rather) for components & store structure ideas inspiration.
+
+## License
+
+MIT licence.

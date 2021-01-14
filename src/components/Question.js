@@ -1,110 +1,78 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Grid from "@material-ui/core/Grid";
+import { asyncAddAnswer } from "../actions/answers";
+import { Redirect } from "react-router-dom";
 import { formatQuestion } from "../utils/helper";
 import { connect } from "react-redux";
-import { handleAddAnswer } from "../store/actions/answers";
-import { Redirect } from "react-router-dom";
-
-import "./Question.css";
 
 class Question extends Component {
   state = {
     value: "",
-    toPollResult: false,
+    redirToPollResult: false,
   };
 
-  handleChange = (event) => {
-    this.setState({ value: event.target.value });
-  };
+  handleChange = (e) => this.setState({ value: e.currentTarget.value });
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { value } = this.state;
-    this.props.dispatch(handleAddAnswer(this.props.qid, value));
-    this.setState({
-      value: "",
-      toPollResult: true,
+    const { dispatch, qid } = this.props;
+    dispatch(asyncAddAnswer(qid, value)).then(() => {
+      this.setState({
+        value: "",
+        redirToPollResult: true,
+      });
     });
   };
 
   render() {
-    const { question, authedUser } = this.props;
+    const { props, state, handleChange, handleSubmit } = this;
+    const { question, authedUser } = props;
+    const { redirToPollResult, value } = state;
 
-    if (!authedUser) {
-      return <Redirect to="/login" />;
-    }
+    if (!authedUser) return <Redirect to="/login" />;
 
-    if (!question) {
-      return null;
-    }
+    if (!question) return <Redirect to="/home" />;
 
-    if (this.state.toPollResult) {
-      return <Redirect to={`/pollResult/${question.id}`} />;
-    }
+    if (redirToPollResult)
+      return <Redirect to={`/pollresult/${question.id}`} />;
 
     return (
-      <div className="questionContainer">
-        <Paper className="questionPaper">
-          <div className="questionBoxHeader">{question.authorName} asks:</div>
-          <div className="questionControls">
-            <Grid container spacing={16}>
-              <Grid item xs={4} alignItems="center" justify="center" container>
-                <div>
-                  <img
-                    className="scoreCardImg"
-                    alt="complex"
-                    src={question.avatar}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={1}>
-                <div className="questionSeparator"></div>
-              </Grid>
-              <Grid item xs={7} container direction="column">
-                <Grid item>
-                  <div className="questionMainTitle">Would you Rather....</div>
-                </Grid>
-                <Grid item>
-                  <div>
-                    <RadioGroup
-                      aria-label="Gender"
-                      name="gender1"
-                      value={this.state.value}
-                      onChange={this.handleChange}
-                    >
-                      <FormControlLabel
-                        value="optionOne"
-                        control={<Radio />}
-                        label={question.optionOne.text}
-                      />
-                      <FormControlLabel
-                        value="optionTwo"
-                        control={<Radio />}
-                        label={question.optionTwo.text}
-                      />
-                    </RadioGroup>
-                  </div>
-                </Grid>
-                <Grid item>
-                  <Button
-                    variant="contained"
-                    color="inherit"
-                    className="questionFormControl"
-                    onClick={this.handleSubmit}
-                    disabled={this.state.value === ""}
-                  >
-                    Submit
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
+      <div className="container question">
+        <h2>{question.authorName} asks:</h2>
+        <div className="card-contents">
+          <img
+            className="userAvatar"
+            alt={`${question.authorName} avatar`}
+            src={question.avatar}
+          />
+          <div className="card-separator"></div>
+          <div className="card-text">
+            <h3>Would you Rather...</h3>
+            <form onSubmit={handleSubmit}>
+              <div className="input-group">
+                <input
+                  id="a1"
+                  type="radio"
+                  name="qr"
+                  value="optionOne"
+                  onChange={handleChange}
+                />
+                <label htmlFor="a1">{question.optionOne.text}</label>
+              </div>
+              <div className="input-group">
+                <input
+                  id="a2"
+                  type="radio"
+                  name="qr"
+                  value="optionTwo"
+                  onChange={handleChange}
+                />
+                <label htmlFor="a2">{question.optionTwo.text}</label>
+              </div>
+              <input className="submit-question" type="submit" value="Submit" disabled={!value} />
+            </form>
           </div>
-        </Paper>
+        </div>
       </div>
     );
   }
@@ -115,9 +83,10 @@ function mapStateToProps({ authedUser, questions, users }, { match }) {
   return {
     authedUser,
     qid: id,
-    question: questions[id]
-      ? formatQuestion(questions[id], users[questions[id].author], authedUser)
-      : null,
+    question:
+      id in questions
+        ? formatQuestion(questions[id], users[questions[id].author], authedUser)
+        : null,
   };
 }
 
